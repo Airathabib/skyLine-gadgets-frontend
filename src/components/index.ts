@@ -1,0 +1,12 @@
+export { default as Header } from './layout/header/index';
+export { default as Footer } from './layout/footer/index';
+export { default as RightBtn } from './ui/buttons/RightBtn';
+export { default as LeftBtn } from './ui/buttons/LeftBtn/index';
+export { default as InputSearch } from './ui/inputSearch/index';
+export { default as Modal } from './ui/modal/index';
+export { default as Pagination } from './ui/pagination/index';
+export { default as QuantityControllers } from './ui/quantityControllers/index';
+export { default as Sort } from './ui/sort/index';
+export { default as StarRating } from './ui/starRating/index';
+export { default as CategoryTitle } from './categoryTitle/index';
+export { default as Icon } from './ui/icon/Icon';

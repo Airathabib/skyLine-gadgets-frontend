@@ -1,0 +1,196 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.HeaderContainer {
+  width: 100vw;
+  background-color: var(--purple-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.LogoContainer {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  padding-inline: 3rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.Logo {
+  background-color: transparent;
+  display: block;
+  margin-left: 0;
+  align-self: start;
+  width: 3rem;
+}
+
+.MainTitle {
+  margin: 0 auto;
+  @include titleH1;
+  text-align: center;
+  padding-bottom: 1rem;
+  color: var(--black-500);
+}
+.MainCart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  &svg {
+    width: 4rem;
+  }
+  &Count {
+    @include ProductCount;
+  }
+}
+.BtnWrapper {
+  position: relative;
+  display: flex;
+}
+.HeaderBtn {
+  background-color: transparent;
+  stroke: var(--purple-800);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  -webkit-transition: transform 0.2s ease;
+  -moz-transition: transform 0.2s ease;
+  -ms-transition: transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.FilterMarker {
+  position: absolute;
+  background-color: var(--loader);
+  color: var(--black-500);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  top: 0.4rem;
+  right: 0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include paragraph8;
+  font-weight: 700;
+  z-index: 10;
+}
+
+.MainIcons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.FavoriteProducts {
+  position: relative;
+  &Marker {
+    @include ProductCount;
+  }
+}
+
+.LoginEnterBtn {
+  background-color: transparent;
+}
+.error {
+  font-size: 0.3rem;
+  color: var(--red-700);
+}
+
+.loading {
+  font-size: 0.3rem;
+  color: var(--purple-800);
+}
+
+@media screen and (width < 1124px) {
+  .LogoContainer {
+    padding-inline: 0.875rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .LogoContainer {
+    padding-inline: 1rem;
+    justify-content: space-between;
+  }
+
+  .Logo {
+    width: 2.2rem;
+  }
+
+  .MainTitle {
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    text-align: center;
+    order: 2;
+  }
+
+  .MainIcons {
+    gap: 0.5rem;
+    order: 2;
+  }
+
+  .HeaderBtn {
+    width: 2rem;
+    height: 2rem;
+    order: 3;
+  }
+
+  .OrderBurger {
+    order: -1;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .MainTitle {
+    font-size: 1.125rem;
+    order: 2;
+  }
+
+  .MainIcons {
+    gap: 0.3rem;
+    order: 2;
+  }
+
+  .OrderLogo {
+    order: 1;
+  }
+
+  .OrderTitle {
+    order: 2;
+    width: 100%;
+    text-align: center;
+  }
+
+  .OrderIcons {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin:0 auto;
+  }
+
+  .OrderBurger {
+    order: -1;
+  }
+}

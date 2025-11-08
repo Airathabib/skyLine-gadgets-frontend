@@ -1,0 +1,56 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.Cart {
+  @include cardsWrapper;
+  max-width: 1680px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  &Header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+		flex-wrap: wrap;
+    gap: 1rem;
+  }
+  &Wrapper {
+    @include wrapper;
+  }
+  &Title {
+    @include titleH4;
+    text-align: center;
+  }
+  &List {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+.PaginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.PaginationBtn {
+  @include PaginationBtn;
+}
+
+.error {
+  @include error;
+}
+
+.loading {
+  @include loading;
+}
+.empty {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-evenly;
+  & h3 {
+    @include titleH2;
+    color: var(--accent);
+  }
+}

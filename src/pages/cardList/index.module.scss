@@ -1,0 +1,36 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.CardList {
+  @include cardsWrapper;
+  position: relative;
+  max-width: 1680px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  &Wrapper {
+    @include wrapper;
+  }
+}
+
+.PaginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.PaginationBtn {
+  @include PaginationBtn;
+  padding: 0;
+}
+
+.error {
+  @include error;
+}
+
+.loading {
+  @include loading;
+}
+
+.ProductTitle {
+  @include productTitle;
+}

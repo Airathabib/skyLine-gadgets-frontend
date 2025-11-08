@@ -1,0 +1,287 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.Card {
+  @include CardBase;
+
+  &Error {
+    @include CardBase;
+    border-color: var(--border-critical);
+    box-shadow: 0px -2px 5px var(--border-focus);
+    background-color: var(--bg-primary);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &Spin {
+    @include CardBase;
+    background-color: var(--bg-primary);
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: red;
+  }
+
+  &Id {
+    @include paragraph4;
+  }
+  &Title {
+    @include titleH3;
+    color: var(--black-600);
+  }
+  &Brand {
+    @include titleH5;
+  }
+  &Descr {
+    @include paragraph3;
+    color: var(--black-600);
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &Price {
+    @include paragraph4;
+    color: var(--black-600);
+    font-weight: 700;
+  }
+  &Date {
+    @include paragraph4;
+  }
+  &Time {
+    @include paragraph4;
+  }
+  &Rating {
+    @include paragraph4;
+  }
+
+  &Image {
+    display: block;
+    width: 12.5rem;
+    margin-top: auto;
+    height: 12.5rem;
+  }
+
+  &Quantity {
+    @include paragraph4;
+    color: var(--black-600);
+
+    &Error {
+      @include paragraph4;
+      color: var(--criticalActive);
+    }
+  }
+
+  &ButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  &BtnEdit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    color: var(--red-400);
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease, fill 0.3s ease;
+    -webkit-transition: color 0.3s ease, fill 0.3s ease;
+    -moz-transition: color 0.3s ease, fill 0.3s ease;
+    -ms-transition: color 0.3s ease, fill 0.3s ease;
+    -o-transition: color 0.3s ease, fill 0.3s ease;
+
+    &:hover {
+      color: var(--red-500);
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-radius: 4px;
+      outline: 2px solid var(--accent-hover);
+      outline-offset: 2px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+    }
+
+    svg {
+      fill: currentColor;
+    }
+
+    &Active {
+      display: flex;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+      background-color: transparent;
+      color: var(--red-700);
+      fill: var(--red-700);
+    }
+  }
+
+  &QuantityWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &BtnAddToCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--accent-active);
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-radius: 4px;
+      outline: 2px solid var(--accent-hover);
+      outline-offset: 2px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+    }
+  }
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background-color: var(--purple-300);
+
+  &Label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &Title,
+    &Descr,
+    &Photo {
+      @include paragraph3;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      border-bottom: 1px solid var(--black-primary);
+    }
+  }
+
+  &Btn {
+    @include Btn;
+    background-color: var(--red-primary);
+    color: var(--white-primary);
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
+    -webkit-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
+    -moz-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
+    -ms-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
+    -o-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
+
+    &:hover {
+      background-color: var(--red-700);
+      color: var(--white-500);
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-radius: 4px;
+      outline: 2px solid var(--accent-hover);
+      outline-offset: 2px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+    }
+  }
+}
+
+.CardBtnMore {
+  width: 60%;
+  text-align: center;
+  @include paragraph3;
+  color: var(--link-text);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: var(--link-bg);
+  text-decoration: none;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  -webkit-transition: color 0.3s ease, background-color 0.3s ease;
+  -moz-transition: color 0.3s ease, background-color 0.3s ease;
+  -ms-transition: color 0.3s ease, background-color 0.3s ease;
+  -o-transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: var(--largeRadius);
+  -webkit-border-radius: var(--largeRadius);
+  -moz-border-radius: var(--largeRadius);
+  -ms-border-radius: var(--largeRadius);
+  -o-border-radius: var(--largeRadius);
+
+  &:hover {
+    color: var(--purple-800);
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-radius: 4px;
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+  }
+
+  &Active {
+    border: none;
+    fill: transparent;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.3s ease, fill 0.3s ease;
+    -webkit-transition: color 0.3s ease, fill 0.3s ease;
+    -moz-transition: color 0.3s ease, fill 0.3s ease;
+    -ms-transition: color 0.3s ease, fill 0.3s ease;
+    -o-transition: color 0.3s ease, fill 0.3s ease;
+    color: var(--link-hover);
+    fill: var(--link-hover);
+  }
+}
+
+.error {
+  @include paragraph10;
+  color: var(--red-primary);
+  text-transform: lowercase;
+}
+
+.InputLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  @include titleH4;
+  color: var(--black-400);
+}
+
+.InputDate {
+  @include paragraph7;
+  color: var(--black-600);
+  background-color: transparent;
+  border: none;
+  pointer-events: none;
+}

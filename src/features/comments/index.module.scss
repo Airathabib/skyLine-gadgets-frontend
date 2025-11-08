@@ -1,0 +1,62 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.Comments {
+  width: 100%;
+  &Block {
+    margin-bottom: 1rem;
+  }
+  &Title {
+    @include titleH2;
+    align-self: start;
+  }
+  &Form {
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &Item {
+      width: 100%;
+      &TArea {
+        resize: none;
+      }
+    }
+  }
+
+  &Button {
+    @include Btn;
+    align-self: start;
+    background-color: var(--link-text);
+  }
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  &Block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: var(--bg-grey);
+    border-radius: var(--largeRadius);
+  }
+}
+.userComment {
+  width: 100%;
+}
+.CommentActions {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.BtnWrapper {
+  display: flex;
+  gap: 1rem;
+  align-self: start;
+}

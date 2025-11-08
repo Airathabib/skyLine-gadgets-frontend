@@ -1,0 +1,32 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.NotFound {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('../../../public/404/404.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  gap: 1.5rem;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  &Title {
+    @include titleH1;
+    color: var(--black-700);
+  }
+  &Link {
+    @include paragraph1;
+    text-decoration: none;
+    padding: 0.5rem;
+    color: var(--link-text);
+    font-weight: 600;
+    transition: color 0.3s ease;
+    &:hover {
+      color: var(--purple-600);
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.Favorites {
+  @include cardsWrapper;
+  max-width: 1680px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  &Title {
+    @include titleH4;
+    text-align: center;
+  }
+  &ListWrapper {
+    @include wrapper;
+  }
+}
+
+.PaginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.PaginationBtn {
+  @include PaginationBtn;
+}
+
+.NotFavorites {
+  @include error;
+}
+
+.error {
+  @include error;
+}
+
+.loading {
+  @include loading;
+}
+
+.ProductTitle {
+  @include productTitle;
+}

@@ -1,0 +1,5 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.ProductTitle {
+  @include productTitle;
+}

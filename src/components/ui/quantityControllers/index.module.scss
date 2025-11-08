@@ -1,0 +1,75 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+:root {
+  --transitionVar: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.CardCounter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.CardCounterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border: 1px solid var(--purple-300);
+  background-color: var(--purple-200);
+  border-radius: var(--smallRadius);
+  cursor: pointer;
+  transition: var(--transitionVar);
+  -webkit-transition: var(--transitionVar);
+  -moz-transition: var(--transitionVar);
+  -ms-transition: var(--transitionVar);
+  -o-transition: var(--transitionVar);
+  &:hover {
+    color: var(--link-text);
+    background-color: var(--purple-400);
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-radius: 4px;
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
+  }
+}
+
+.CardCounterCount {
+  @include paragraph2;
+  color: var(--black-600);
+}
+
+.CardBtnDelete {
+  margin-left: 8px;
+  padding: 4px 8px;
+  background: var(--black-500);
+  color: var(--white-primary);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transitionVar);
+  -webkit-transition: var(--transitionVar);
+  -moz-transition: var(--transitionVar);
+  -ms-transition: var(--transitionVar);
+  -o-transition: var(--transitionVar);
+  &:hover {
+    background: var(--purple-800);
+    color: var(--white-600);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-radius: 4px;
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
+  }
+}

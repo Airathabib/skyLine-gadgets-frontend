@@ -1,0 +1,12 @@
+export { HeartIcon } from './HeartIcon';
+export { CartIcon } from './CartIcon';
+export { UserIcon } from './UserIcon';
+export { BurgerIcon } from './BurgerIcon';
+export { LeftBtnIcon } from './LeftBtnIcon';
+export { RightBtnIcon } from './RightBtnIcon';
+export { ArrowUpIcon } from './ArrowUpIcon';
+export { ArrowDownIcon } from './ArrowDownIcon';
+export { CardHeartIcon } from './CardHeartIcon';
+export { CardCartIcon } from './CardCartIcon.tsx';
+export { ArrowBackIcon } from './ArrowBackIcon.tsx';
+export { TrashIcon } from './TrashIcon.tsx';

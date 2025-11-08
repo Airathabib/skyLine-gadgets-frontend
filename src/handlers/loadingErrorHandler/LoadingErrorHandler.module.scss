@@ -1,0 +1,9 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.loading {
+  @include loading;
+}
+
+.error {
+  @include error;
+}

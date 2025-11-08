@@ -1,0 +1,54 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.UserWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.AdminWrapper {
+  position: relative;
+  @include Btn;
+  cursor: pointer;
+  background: var(--black-100);
+  transition: background 0.3s ease;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  -ms-transition: background 0.3s ease;
+  -o-transition: background 0.3s ease;
+  &:hover {
+    background: var(--black-200);
+  }
+  &Link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.success {
+  @include paragraph2;
+  color: var(--link-text);
+}
+.error {
+  font-family: 'JetBrainsMono', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--criticalActive);
+}

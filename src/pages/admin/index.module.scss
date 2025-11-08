@@ -1,0 +1,31 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.Admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 1rem;
+  &Title {
+    @include titleH2;
+    color: var(--black-500);
+  }
+  &Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.Form {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 576px) {
+}
