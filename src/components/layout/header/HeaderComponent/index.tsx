@@ -28,7 +28,9 @@ const HeaderComponent: React.FC = () => {
       <div className={styles.HeaderContainer}>
         {error && <div className={styles.Error}>{error}</div>}
         <div className={styles.LogoContainer}>
-          <img className={`${styles.Logo} ${styles.OrderLogo}`} src={Logo} alt="logo" />
+          <Link to="appinfo">
+            <img className={`${styles.Logo} ${styles.OrderLogo}`} src={Logo} alt="logo" />
+          </Link>
           <div className={`${styles.BtnWrapper} ${styles.OrderBurger}`}>
             {fiilters && <div className={styles.FilterMarker} />}
             <button className={styles.HeaderBtn} onClick={handleOpenNav}>

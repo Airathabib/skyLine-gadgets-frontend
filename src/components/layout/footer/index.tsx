@@ -4,7 +4,7 @@ const Footer: React.FC = () => {
   return (
     <footer className={styles.Footer}>
       <div className={styles.FooterContainer}>
-        <span>@2025</span>
+        <p>© {new Date().getFullYear()} SkyLine Gadget. Все права защищены.</p>
       </div>
     </footer>
   );

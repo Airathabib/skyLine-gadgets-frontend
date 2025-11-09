@@ -1,0 +1,137 @@
+@use '@/assets/styles/variables/_mixins' as *;
+
+.Container {
+  min-height: 100vh;
+  background-color: var(--white-100);
+  padding: 0.5rem 1rem;
+}
+
+.Content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--white-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 0 2.5rem;
+  line-height: 1.6;
+  color: var(--black-500);
+  &InfoBack {
+    @include ButtonReset;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    justify-content: center;
+    @include paragraph2;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    @include TransitionBase;
+    border-radius: var(--largeRadius);
+    -webkit-border-radius: var(--largeRadius);
+    -moz-border-radius: var(--largeRadius);
+    -ms-border-radius: var(--largeRadius);
+    -o-border-radius: var(--largeRadius);
+
+    &:hover {
+      color: var(--purple-600);
+    }
+  }
+}
+
+.Header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.Title {
+  @include titleH2;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.Subtitle {
+  @include paragraph5;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.Section {
+  margin-bottom: 2rem;
+  &Title {
+    @include titleH3;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--black-200);
+  }
+}
+
+.FeaturesList {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+  li {
+    @include paragraph4;
+    margin-bottom: 0.6rem;
+    color: var(--text-secondary);
+  }
+}
+
+.TechGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.TechCard {
+  background: var(--white-100);
+  border: 1px solid var(--black-100);
+  border-radius: 8px;
+  padding: 1.25rem;
+  &h3 {
+    @include titleH3;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  &ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &li {
+    @include paragraph4;
+    padding: 0.25rem 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+}
+
+.Footer {
+  border-top: 1px solid var(--white-100);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .TechGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .Title {
+    font-size: 2rem;
+  }
+
+  .Content {
+    padding: 1.5rem;
+  }
+}

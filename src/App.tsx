@@ -13,6 +13,7 @@ import CardInfo from '@/pages/cardInfo';
 import NotFound from '@/pages/notFoundPage';
 
 import styles from './App.module.scss';
+import AppInfo from './pages/appInfo';
 
 function App(): React.ReactElement {
   const dispatch = useAppDispatch();
@@ -51,6 +52,7 @@ function App(): React.ReactElement {
             }
           />
           <Route path="card/:id" element={<CardInfo />} />
+          <Route path="appinfo" element={<AppInfo />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
