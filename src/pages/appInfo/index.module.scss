@@ -7,14 +7,7 @@
 }
 
 .Content {
-  max-width: 800px;
-  margin: 0 auto;
-  background: var(--white-primary);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  padding: 0 2.5rem;
-  line-height: 1.6;
-  color: var(--black-500);
+  @include Wrapper;
   &InfoBack {
     @include ButtonReset;
     align-self: flex-start;
