@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Tooltip } from 'antd';
-import  useProductCardActions  from '@/hooks/useProductCardActions';
+import useProductCardActions from '@/hooks/useProductCardActions';
 import { Product } from '@/shared/types/interface';
 import StarRating from '@/components/ui/starRating';
 import QuantityControllers from '@/components/ui/quantityControllers';
-import  Icon  from '@/components/ui/icon/Icon';
+import Icon from '@/components/ui/icon/Icon';
 import styles from './index.module.scss';
 
 interface CardProps extends Product {
@@ -40,8 +40,8 @@ const Card: React.FC<CardProps> = memo(
         <p className={styles.CardDescr}>
           Цена: <span className={styles.CardPrice}>{price}₽</span>
         </p>
-        <span className={styles.CardDate}>Аккумулятор: {accum}</span>
-        <span className={styles.CardTime}> Обьем памяти: {memory}</span>
+        <span className={styles.CardDate}>Аккумулятор: {accum}мА·ч</span>
+        <span className={styles.CardTime}> Обьем памяти: {memory}ГБ</span>
         <span className={styles.CardRating}>
           {' '}
           Рейтинг:{' '}

@@ -51,8 +51,8 @@ const CardInfo: React.FC = () => {
         <div className={styles.CardInfoBlock}>
           <img className={styles.CardInfoImage} src={product.photo} alt="photo" />
           <div className={styles.CardInfoText}>
-            <p className={styles.CardInfoAccum}>Аккумулятор: {product.accum}</p>
-            <p className={styles.CardInfoMemory}>Обьем памяти: {product.memory}</p>
+            <p className={styles.CardInfoAccum}>Аккумулятор: {product.accum}мА·ч</p>
+            <p className={styles.CardInfoMemory}>Обьем памяти: {product.memory}ГБ</p>
             <div className={styles.CardInfoRating}>
               {' '}
               Рейтинг:{' '}
@@ -74,7 +74,7 @@ const CardInfo: React.FC = () => {
                 ? 'Нет в наличии'
                 : `В наличии: ${product.stockQuantity}`}
             </p>
-            <p className={styles.CardInfoPrice}>Цена: {product.price}</p>
+            <p className={styles.CardInfoPrice}>Цена: {product.price}₽</p>
           </div>
         </div>
 

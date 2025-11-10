@@ -115,10 +115,10 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ onRefetch }) =>
           <Input type="number" placeholder="Количество на складе" />
         </Form.Item>
         <Form.Item name="memory" label="Память">
-          <Input placeholder="Например: 256 ГБ" />
+          <Input placeholder="Например: 256" />
         </Form.Item>
         <Form.Item name="accum" label="Аккумулятор">
-          <Input placeholder="Например: 5000 мА·ч" />
+          <Input placeholder="Например: 5000" />
         </Form.Item>
         <Form.Item name="photo" label="Фото (URL)">
           <Input placeholder="/public/photo.webp" />
