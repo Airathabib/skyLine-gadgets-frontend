@@ -3,7 +3,7 @@ import { Button, Typography } from 'antd';
 import ProductsManagement from './components/ProductsManagement';
 import BrandsManagement from './components/BrandsManagement';
 import UsersManagement from './components/UsersManagement';
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 const { Title } = Typography;
 
 const Admin: React.FC = () => {
@@ -16,7 +16,9 @@ const Admin: React.FC = () => {
 
   return (
     <div className={styles.Admin}>
-      <Title className={styles.AdminTitle} level={2}>Админка</Title>
+      <Title className={styles.AdminTitle} level={2}>
+        Админка
+      </Title>
 
       <div className={styles.AdminWrapper}>
         <Button

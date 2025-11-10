@@ -24,7 +24,6 @@ const Favorites: React.FC = () => {
   const { data: favorites = [], isLoading, error } = useGetFavoritesQuery();
   const cart = useAppSelector(state => state.cart.cart);
 
- 
   const getErrorMessage = (err: any): string | null => {
     if (!err) return null;
     if (typeof err === 'string') return err;

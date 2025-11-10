@@ -51,7 +51,7 @@ export const userRegistration = createAsyncThunk<
   UserType,
   UserType,
   { dispatch: AppDispatch; rejectValue: ErrorType }
->('auth/userRegistration', async (userForm, { dispatch, rejectWithValue }) => {
+>('auth/userRegistration', async (userForm, { rejectWithValue }) => {
   try {
     const response = await fetch(`${USER_URL}/register`, {
       method: 'POST',
@@ -63,8 +63,6 @@ export const userRegistration = createAsyncThunk<
       // ← передаём ошибку из бэкенда
       return rejectWithValue({ message: errorData.error });
     }
-
-    const newUser = await response.json();
     // Автоматически логинимся после регистрации!!!
     const loginResponse = await fetch(`${USER_URL}/login`, {
       method: 'POST',
@@ -82,8 +80,7 @@ export const userRegistration = createAsyncThunk<
     const loginData = await loginResponse.json();
     localStorage.setItem('user', JSON.stringify(loginData.user));
     localStorage.setItem('isAuth', 'true');
-    localStorage.setItem('token', loginData.token); // ← сохраняем токен!
-
+    localStorage.setItem('token', loginData.token);
     return loginData.user;
   } catch (error: unknown) {
     return rejectWithValue({
@@ -92,7 +89,6 @@ export const userRegistration = createAsyncThunk<
   }
 });
 
-//
 export const restoreAuth = createAsyncThunk('auth/restore', () => {
   const userStr = localStorage.getItem('user');
   const isAuth = localStorage.getItem('isAuth') === 'true';

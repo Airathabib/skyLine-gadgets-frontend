@@ -2,12 +2,7 @@ import { useEffect } from 'react';
 import { useGetFavoritesQuery } from '@/store/favoritesApi';
 
 const useFavoritesList = () => {
-  const {
-    data: favorites = [],
-    error,
-    isLoading,
-    refetch,
-  } = useGetFavoritesQuery();
+  const { data: favorites = [], error, isLoading, refetch } = useGetFavoritesQuery();
 
   useEffect(() => {
     refetch();

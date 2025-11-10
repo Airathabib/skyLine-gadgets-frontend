@@ -20,12 +20,11 @@
   }
 }
 
+.Productlink {
+  color: var(--link-text);
+  text-decoration: underline;
+}
+
 .Form {
   width: 100%;
-}
-
-@media (max-width: 768px) {
-}
-
-@media (max-width: 576px) {
 }

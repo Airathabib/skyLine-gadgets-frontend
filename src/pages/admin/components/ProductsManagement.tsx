@@ -7,6 +7,7 @@ import {
 import { useGetBrandsQuery } from '@/store/brandsAPI';
 import { Product } from '@/shared/types/interface';
 import styles from '../index.module.scss';
+import { Link } from 'react-router-dom';
 interface ProductsManagementProps {
   onRefetch: () => void;
 }
@@ -51,7 +52,15 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ onRefetch }) =>
 
   const productColumns = [
     { title: 'ID', dataIndex: 'id', key: 'id' },
-    { title: 'Название', dataIndex: 'title', key: 'title' },
+    {
+      title: 'Название',
+      key: 'title',
+      render: (_: any, record: Product) => (
+        <Link to={`/card/${record.id}`} className={styles.ProductLink}>
+          {record.title}
+        </Link>
+      ),
+    },
     { title: 'Бренд', dataIndex: 'brand', key: 'brand' },
     { title: 'Цена', dataIndex: 'price', key: 'price' },
     {

@@ -17,7 +17,7 @@ export const ratingsApi = createApi({
   endpoints: builder => ({
     getRating: builder.query({
       query: productId => `ratings/${productId}`,
-      providesTags: (result, error, productId) => [{ type: 'Rating', id: productId }],
+      providesTags: productId => [{ type: 'Rating', id: productId }],
     }),
     setRating: builder.mutation({
       query: ({ productId, rating }) => ({
@@ -25,7 +25,7 @@ export const ratingsApi = createApi({
         method: 'POST',
         body: { productId, rating },
       }),
-      invalidatesTags: (result, error, { productId }) => [{ type: 'Rating', id: productId }],
+      invalidatesTags: ({ productId }) => [{ type: 'Rating', id: productId }],
     }),
   }),
 });

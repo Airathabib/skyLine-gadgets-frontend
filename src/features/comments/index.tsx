@@ -27,7 +27,7 @@ const Comments: React.FC<{ productId: string }> = ({ productId }: { productId: s
   const [addComments] = useAddCommentsMutation();
   const [updateComment] = useUpdateCommentMutation();
   const [deleteComment] = useDeleteCommentMutation();
-
+  console.log(editForms, 'editForms');
   const validateForm = async () => {
     try {
       await form.validateFields();

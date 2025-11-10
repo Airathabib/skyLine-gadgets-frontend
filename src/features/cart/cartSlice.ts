@@ -14,9 +14,17 @@ const initialState: CartState = {
   error: null,
 };
 
-const getAuthHeaders = () => {
+const getAuthHeaders = (): Record<string, string> => {
   const token = localStorage.getItem('token');
-  return token ? { Authorization: `Bearer ${token}` } : {};
+  if (token) {
+    return {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
+  }
+  return {
+    'Content-Type': 'application/json',
+  };
 };
 
 export const fetchCart = createAsyncThunk<Cart[], void, { rejectValue: string }>(
@@ -24,7 +32,7 @@ export const fetchCart = createAsyncThunk<Cart[], void, { rejectValue: string }>
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(`${URL}/cart`, {
-        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+        headers: getAuthHeaders(),
       });
 
       if (!response.ok) {
@@ -47,10 +55,7 @@ export const updateCartQuantity = createAsyncThunk<
   try {
     const response = await fetch(`${URL}/cart`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...getAuthHeaders(),
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ productId, delta }),
     });
 

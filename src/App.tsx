@@ -11,9 +11,8 @@ import Cart from '@/features/cart';
 import AdminPage from '@/pages/admin/adminPage';
 import CardInfo from '@/pages/cardInfo';
 import NotFound from '@/pages/notFoundPage';
-
-import styles from './App.module.scss';
 import AppInfo from './pages/appInfo';
+import styles from './App.module.scss';
 
 function App(): React.ReactElement {
   const dispatch = useAppDispatch();
