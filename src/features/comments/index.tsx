@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   useGetCommentsQuery,
   useAddCommentsMutation,
@@ -21,7 +21,6 @@ const Comments: React.FC<{ productId: string }> = ({ productId }: { productId: s
   const { setIsFormValid, isTouched } = useContext(CardContext) as CardContextType;
   const { user } = useAppSelector(state => state.users);
   const [form] = Form.useForm();
-  const [editForms, setEditForms] = useState<Record<number, boolean>>({});
 
   const { data: comments = [], error, isLoading } = useGetCommentsQuery(productId);
   const [addComments] = useAddCommentsMutation();
@@ -70,7 +69,6 @@ const Comments: React.FC<{ productId: string }> = ({ productId }: { productId: s
     updateComment({ id: commentId, userComment: values.userComment })
       .unwrap()
       .then(() => {
-        setEditForms(prev => ({ ...prev, [commentId]: false }));
         message.success('Комментарий обновлён');
       })
       .catch(() => {
