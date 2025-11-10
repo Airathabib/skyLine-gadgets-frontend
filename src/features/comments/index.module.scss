@@ -60,3 +60,9 @@
   gap: 1rem;
   align-self: start;
 }
+
+@media screen and (max-width: 610px) {
+  .Comments {
+    width: max-content;
+  }
+}

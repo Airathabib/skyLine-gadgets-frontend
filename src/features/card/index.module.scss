@@ -285,3 +285,9 @@
   border: none;
   pointer-events: none;
 }
+
+@media screen and (max-width: 610px) {
+  .Card {
+    padding: 1rem;
+  }
+}

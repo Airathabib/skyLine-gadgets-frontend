@@ -37,13 +37,13 @@ const CardInfo: React.FC = () => {
   return (
     <div className={styles.CardInfo}>
       {error && <div className={styles.error}>Ошибка загрузки продукта</div>}
-      <div className={styles.CardInfoHeader}>
-        <h2 className={styles.CardInfoTitle}>Информация о товаре</h2>
+      <header className={styles.CardInfoHeader}>
         <button className={styles.CardInfoBack} onClick={returnToCard}>
           <Icon name="arrowBack" size={24} />
           <span>Назад </span>
         </button>
-      </div>
+        <h1 className={styles.CardInfoTitle}>Информация о товаре</h1>
+      </header>
 
       <div className={styles.CardInfoWrapper}>
         <h3 className={styles.CardInfoTitle}>{product.title}</h3>

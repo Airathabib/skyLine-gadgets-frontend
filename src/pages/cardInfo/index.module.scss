@@ -6,29 +6,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 50vw;
+  max-width: 70vw;
   gap: 1rem;
 
   &Header {
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    gap: 1rem;
   }
 
   &Title {
     @include titleH2;
+    font-size: 2.5rem;
+    font-weight: 700;
     text-align: center;
-    margin: 0 auto;
+    color: var(--text-secondary);
+    margin: 0;
   }
 
   &Rating {
     margin: 8px 0;
-    color: #666;
+    color: var(--black-600);
     font-size: 14px;
   }
-
   &Back {
     @include ButtonReset;
     align-self: flex-start;
@@ -119,6 +118,7 @@
   &Block {
     align-self: start;
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
 
@@ -196,4 +196,24 @@
   @include titleH2;
   color: var(--loader);
   text-align: center;
+}
+
+@media screen and (max-width: 998px) {
+  .CardInfo {
+    &Header {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .CardInfo {
+    &Title {
+      font-size: 1.5rem;
+    }
+    &Back {
+      order: -1;
+    }
+  }
 }
