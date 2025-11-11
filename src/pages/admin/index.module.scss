@@ -19,6 +19,9 @@
     width: 100%;
   }
 }
+.pagination {
+  @include tablePaginationCenter;
+}
 
 .Productlink {
   color: var(--link-text);

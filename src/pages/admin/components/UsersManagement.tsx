@@ -1,6 +1,7 @@
 import { Button, message, Popconfirm, Table } from 'antd';
 import { useDeleteUserMutation, useGetUsersQuery } from '@/store/usersApi';
 import { UserType } from '@/shared/types/interface';
+import styles from '../index.module.scss';
 
 interface UsersManagementProps {
   onRefetch: () => void;
@@ -51,7 +52,11 @@ const UsersManagement: React.FC<UsersManagementProps> = ({ onRefetch }) => {
       dataSource={users}
       columns={userColumns}
       rowKey="id"
-      pagination={{ pageSize: 5, hideOnSinglePage: true }}
+      pagination={{
+        pageSize: 5,
+        hideOnSinglePage: true,
+        className: styles.pagination,
+      }}
     />
   );
 };

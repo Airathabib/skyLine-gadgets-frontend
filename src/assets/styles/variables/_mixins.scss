@@ -267,3 +267,9 @@
   line-height: 1.6;
   color: var(--black-500);
 }
+
+@mixin tablePaginationCenter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

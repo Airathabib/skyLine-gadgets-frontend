@@ -8,6 +8,7 @@ import { useGetBrandsQuery } from '@/store/brandsAPI';
 import { Product } from '@/shared/types/interface';
 import styles from '../index.module.scss';
 import { Link } from 'react-router-dom';
+
 interface ProductsManagementProps {
   onRefetch: () => void;
 }
@@ -145,7 +146,11 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ onRefetch }) =>
         columns={productColumns}
         rowKey="id"
         style={{ marginTop: 24 }}
-        pagination={{ pageSize: 5, hideOnSinglePage: true }}
+        pagination={{
+          pageSize: 5,
+          hideOnSinglePage: true,
+          className: styles.pagination,
+        }}
       />
     </>
   );

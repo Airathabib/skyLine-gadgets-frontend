@@ -1,5 +1,6 @@
 import { Button, Form, Input, message, Popconfirm, Table } from 'antd';
 import { useAddBrandMutation, useDeleteBrandMutation, useGetBrandsQuery } from '@/store/brandsAPI';
+import styles from '../index.module.scss';
 
 interface BrandsManagementProps {
   onRefetch: () => void;
@@ -71,7 +72,11 @@ const BrandsManagement: React.FC<BrandsManagementProps> = ({ onRefetch }) => {
         columns={brandColumns}
         rowKey="name"
         style={{ marginTop: 24 }}
-        pagination={{ pageSize: 5, hideOnSinglePage: true }}
+        pagination={{
+          pageSize: 5,
+          hideOnSinglePage: true,
+          className: styles.pagination,
+        }}
       />
     </>
   );

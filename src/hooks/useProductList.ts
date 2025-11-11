@@ -20,12 +20,10 @@ const useProductList = (): {
     skip: !searchParams,
     refetchOnMountOrArgChange: true,
   });
-
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (isError && error) {
-      // Handle different error types from RTK Query
       if ('message' in error && error.message) {
         setErrorMessage(error.message);
       } else if ('error' in error && error.error) {
