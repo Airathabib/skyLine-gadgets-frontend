@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { URL } from '@/shared/API/api';
-import { Cart } from '@/shared/types/interface';
+import { CartItem as Cart } from '@/shared/types/interface';
 
 interface CartState {
   cart: Cart[];

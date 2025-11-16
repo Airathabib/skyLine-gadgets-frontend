@@ -1,4 +1,3 @@
-// shared/store/commentsApi.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { URL } from '@/shared/API/api';
 import { Comment, CreateCommentDto, UpdateCommentDto } from '@/shared/types/interface';
@@ -6,7 +5,7 @@ import { Comment, CreateCommentDto, UpdateCommentDto } from '@/shared/types/inte
 export const commentsApi = createApi({
   reducerPath: 'commentsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: URL, // = http://localhost:3001/api
+    baseUrl: URL,
     prepareHeaders: headers => {
       const token = localStorage.getItem('token');
       if (token) {
@@ -17,7 +16,6 @@ export const commentsApi = createApi({
   }),
   tagTypes: ['Comment'],
   endpoints: builder => ({
-    // GET /api/comments?productId=123
     getComments: builder.query<Comment[], string>({
       query: productId => `comments?productId=${productId}`,
       providesTags: [{ type: 'Comment', id: 'LIST' }],

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchCart } from '@/features/cart/cartSlice';
-import { Cart } from '@/shared/types/interface';
+import { CartItem as Cart } from '@/shared/types/interface';
 
 const useCartList = (): {
   error: string | null;

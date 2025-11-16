@@ -41,13 +41,13 @@ export type ProductBase = {
 
 // Товар в каталоге → остаток на складе
 export type Product = ProductBase & {
-  quantity: number; 
+  quantity: number;
 };
 
 // Товар в корзине → два количества
 export type CartItem = ProductBase & {
-  stock_quantity: number; 
-  cart_quantity: number; 
+  stock_quantity: number;
+  cart_quantity: number;
 };
 
 export interface Comment {

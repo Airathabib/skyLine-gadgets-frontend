@@ -15,13 +15,11 @@ export const favoritesApi = createApi({
   }),
   tagTypes: ['Favorite'],
   endpoints: builder => ({
-    // Получить избранное текущего пользователя
     getFavorites: builder.query<any[], void>({
       query: () => '/favorites',
       providesTags: ['Favorite'],
     }),
 
-    // Добавить в избранное
     addFavorite: builder.mutation<void, { productId: string }>({
       query: ({ productId }) => ({
         url: '/favorites',
@@ -31,7 +29,6 @@ export const favoritesApi = createApi({
       invalidatesTags: ['Favorite'],
     }),
 
-    // Удалить из избранного
     removeFavorite: builder.mutation<void, { productId: string }>({
       query: ({ productId }) => ({
         url: `/favorites/${productId}`,

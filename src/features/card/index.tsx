@@ -10,9 +10,10 @@ import styles from './index.module.scss';
 
 interface CardProps extends ProductBase {
   quantity?: number;
-  stock_quantity?: number;
-  cart_quantity?: number;
+  stockQuantity?: number;
+  cartQuantity?: number;
   isInCartPage?: boolean;
+  isInCart?: boolean;
 }
 
 const Card: React.FC<CardProps> = memo(
@@ -26,11 +27,11 @@ const Card: React.FC<CardProps> = memo(
     photo,
     brand,
     quantity,
-    cart_quantity,
-    stock_quantity,
+    cartQuantity,
+    stockQuantity,
     isInCartPage,
   }) => {
-    const stockQuantity = stock_quantity ?? quantity ?? 0;
+    const resolvedStockQuantity = stockQuantity ?? quantity ?? 0;
     const {
       isAuth,
       isLiked,
@@ -43,9 +44,9 @@ const Card: React.FC<CardProps> = memo(
       handleQuantityMinus,
       handleDeleteFromCart,
       handleRate,
-    } = useProductCardActions(id, stockQuantity);
+    } = useProductCardActions(id, resolvedStockQuantity);
 
-    const actualCartQuantity = isInCartPage ? cart_quantity ?? 0 : cartQtyFromHook;
+    const actualCartQuantity = isInCartPage ? cartQuantity ?? 0 : cartQtyFromHook;
     const isInCart = isInCartPage ? true : isInCartFromHook;
 
     return (
@@ -78,7 +79,7 @@ const Card: React.FC<CardProps> = memo(
           {isInCart && (
             <QuantityControllers
               quantity={actualCartQuantity}
-              stockQuantity={stockQuantity}
+              stockQuantity={resolvedStockQuantity}
               onIncrease={handleQuantityPlus}
               onDecrease={handleQuantityMinus}
               onDelete={handleDeleteFromCart}
@@ -107,7 +108,7 @@ const Card: React.FC<CardProps> = memo(
               <button
                 className={styles.CardBtnAddToCart}
                 onClick={handleAddToCart}
-                disabled={stockQuantity <= 0 || isInCart}
+                disabled={resolvedStockQuantity <= 0 || isInCart}
               >
                 <span>
                   {!isAuth

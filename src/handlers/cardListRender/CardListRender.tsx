@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Card from '@/features/card';
-import { Cart, Product } from '@/shared/types/interface';
+import { CartItem as Cart, Product } from '@/shared/types/interface';
 
 interface CardListRendererProps {
   products: Product[];

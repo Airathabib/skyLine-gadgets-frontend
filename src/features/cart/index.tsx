@@ -6,11 +6,11 @@ import { CardContext } from '@/context/Context';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import { CardContextType } from '@/shared/types/interface';
 import Sort from '@/components/ui/sort';
-import CardListRenderer from '@/handlers/cardListRender/CardListRender';
 import LeftBtn from '@/components/ui/buttons/LeftBtn';
 import Pagination from '@/components/ui/pagination';
 import RightBtn from '@/components/ui/buttons/RightBtn';
 import styles from './index.module.scss';
+import Card from '../card';
 
 const Cart: React.FC = () => {
   const { loading, cart } = useCartList();
@@ -55,7 +55,17 @@ const Cart: React.FC = () => {
       </div>
       <div className={styles.CartWrapper}>
         {sortedCart.length > 0 && <Sort />}
-        <CardListRenderer products={currentCards} cart={sortedCart} />
+        {currentCards.map(item => (
+          <Card
+            key={item.id}
+            {...item}
+            quantity={item.stock_quantity}
+            stockQuantity={item.stock_quantity}
+            cartQuantity={item.cart_quantity}
+            isInCart={true}
+            isInCartPage={true}
+          />
+        ))}
       </div>
 
       {totalPages > 1 && (

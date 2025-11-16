@@ -1,5 +1,4 @@
 import React, { createContext, SetStateAction, useState } from 'react';
-
 import { CardContextType } from '@/shared/types/interface';
 import { useSearchParams } from 'react-router-dom';
 
