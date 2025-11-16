@@ -7,11 +7,7 @@ import {
 } from '@/store/commentsApi';
 import { Button, Form, Input, message } from 'antd';
 import { CardContext } from '@/context/Context';
-import {
-  CardContextType,
-  Comments as CommentType,
-  CreateCommentData,
-} from '@/shared/types/interface';
+import { CardContextType, CreateCommentDto } from '@/shared/types/interface';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import CommentItem from './CommentItem/CommentItem';
 
@@ -26,6 +22,7 @@ const Comments: React.FC<{ productId: string }> = ({ productId }: { productId: s
   const [addComments] = useAddCommentsMutation();
   const [updateComment] = useUpdateCommentMutation();
   const [deleteComment] = useDeleteCommentMutation();
+
   const validateForm = async () => {
     try {
       await form.validateFields();
@@ -41,7 +38,7 @@ const Comments: React.FC<{ productId: string }> = ({ productId }: { productId: s
     }
   }, [isTouched]);
 
-  const handleAdd = (values: Pick<CreateCommentData, 'userComment'>) => {
+  const handleAdd = (values: Pick<CreateCommentDto, 'userComment'>) => {
     if (!user) {
       message.warning('Войдите в аккаунт, чтобы оставить комментарий');
       return;
@@ -53,11 +50,11 @@ const Comments: React.FC<{ productId: string }> = ({ productId }: { productId: s
       userComment: values.userComment,
       date,
       productId,
-      user_id: user.id,
+      userId: user.id,
     })
       .unwrap()
       .then(() => {
-        form.resetFields();
+        form.resetFields(); 
         message.success('Комментарий добавлен');
       })
       .catch(() => {
@@ -66,40 +63,26 @@ const Comments: React.FC<{ productId: string }> = ({ productId }: { productId: s
   };
 
   const handleEdit = (commentId: number, values: { userComment: string }) => {
-    updateComment({ id: commentId, userComment: values.userComment })
-      .unwrap()
-      .then(() => {
-        message.success('Комментарий обновлён');
-      })
-      .catch(() => {
-        message.error('Не удалось обновить комментарий');
-      });
+    updateComment({ id: commentId, userComment: values.userComment });
   };
 
-  const handleReply = (data: Pick<CommentType, 'userName' | 'userComment'>, parent_id: number) => {
-    if (!user) {
-      message.warning('Войдите в аккаунт, чтобы ответить');
-      return;
-    }
-
+  const handleReply = (
+    data: Pick<CreateCommentDto, 'userName' | 'userComment'>,
+    parentId: number
+  ) => {
+    if (!user) return;
     const date = new Date().toLocaleString();
     addComments({
       ...data,
       date,
       productId,
-      user_id: user.id,
-      parent_id,
-    })
-      .unwrap()
-      .then(() => {
-        message.success('Ответ добавлен');
-      })
-      .catch(() => {
-        message.error('Не удалось добавить ответ');
-      });
+      userId: user.id,
+      parentId,
+    });
   };
-  const handleDelete = (commentId: number) => {
-    deleteComment(commentId)
+
+  const handleDelete = (comment_id: number) => {
+    deleteComment(comment_id)
       .unwrap()
       .then(() => {
         message.success('Комментарий удалён');

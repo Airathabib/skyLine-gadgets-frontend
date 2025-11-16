@@ -32,7 +32,7 @@ const useProductCardActions = (productId: string, stockQuantity: number) => {
   const cart = useAppSelector(state => state.cart.cart);
   const cartItem = cart.find(item => item.id === productId);
   const isInCart = !!cartItem;
-  const cartQuantity = cartItem?.cartQuantity || 0;
+  const cart_quantity = cartItem?.cart_quantity || 0;
 
   const handleAddToCart = () => {
     if (!isAuth) {
@@ -97,7 +97,7 @@ const useProductCardActions = (productId: string, stockQuantity: number) => {
     isAuth,
     isLiked,
     isInCart,
-    cartQuantity,
+    cart_quantity,
     ratingData,
     handleLikeToggle,
     handleAddToCart,

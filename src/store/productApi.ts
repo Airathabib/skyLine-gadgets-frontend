@@ -18,19 +18,14 @@ export const productsApi = createApi({
     getProducts: builder.query<any[], string>({
       query: params => `products/?${params}`,
     }),
-    toggleLike: builder.mutation<any, { id: string; like: boolean }>({
-      query: ({ id, like }) => ({
-        url: `products/${id}`,
-        method: 'PATCH',
-        body: { like },
-      }),
-    }),
+
     createProduct: builder.mutation<any, any>({
       query: product => ({
         url: 'products',
         method: 'POST',
         body: product,
       }),
+      invalidatesTags: ['Product'],
     }),
 
     deleteProduct: builder.mutation<void, string>({
@@ -43,9 +38,5 @@ export const productsApi = createApi({
   }),
 });
 
-export const {
-  useGetProductsQuery,
-  useToggleLikeMutation,
-  useCreateProductMutation,
-  useDeleteProductMutation,
-} = productsApi;
+export const { useGetProductsQuery, useCreateProductMutation, useDeleteProductMutation } =
+  productsApi;

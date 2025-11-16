@@ -18,8 +18,8 @@ const Cart: React.FC = () => {
   const { data: sortedCart } = useFilteredList(cart);
   const { currentPage, cardsPerPage, paginate, firstCardIndex, lastCardIndex } = context;
 
-  const productCount = cart.reduce((acc, product) => acc + product.cartQuantity, 0);
-  const totalPrice = cart.reduce((acc, product) => acc + product.price * product.cartQuantity, 0);
+  const productCount = cart.reduce((acc, product) => acc + product.cart_quantity, 0);
+  const totalPrice = cart.reduce((acc, product) => acc + product.price * product.cart_quantity, 0);
   const { isAuth } = useAppSelector(state => state.users);
 
   // Pagination

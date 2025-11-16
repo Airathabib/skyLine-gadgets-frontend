@@ -1,11 +1,12 @@
+// shared/store/commentsApi.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { URL } from '@/shared/API/api';
-import { Comments, CreateCommentData } from '@/shared/types/interface';
+import { Comment, CreateCommentDto, UpdateCommentDto } from '@/shared/types/interface';
 
 export const commentsApi = createApi({
   reducerPath: 'commentsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: URL,
+    baseUrl: URL, // = http://localhost:3001/api
     prepareHeaders: headers => {
       const token = localStorage.getItem('token');
       if (token) {
@@ -16,34 +17,39 @@ export const commentsApi = createApi({
   }),
   tagTypes: ['Comment'],
   endpoints: builder => ({
-    getComments: builder.query<Comments[], string>({
-      query: id => `comments?productId=${id}`,
-      providesTags: [{ type: 'Comment', id: 'COMMENT' }],
+    // GET /api/comments?productId=123
+    getComments: builder.query<Comment[], string>({
+      query: productId => `comments?productId=${productId}`,
+      providesTags: [{ type: 'Comment', id: 'LIST' }],
     }),
 
-    addComments: builder.mutation<Comments, CreateCommentData>({
+    // POST /api/comments
+    addComments: builder.mutation<Comment, CreateCommentDto>({
       query: comment => ({
         url: 'comments',
         method: 'POST',
-        body: comment,
+        body: comment, // ← всё в camelCase
       }),
-      invalidatesTags: [{ type: 'Comment', id: 'COMMENT' }],
+      invalidatesTags: [{ type: 'Comment', id: 'LIST' }],
     }),
-    updateComment: builder.mutation<Comment, { id: number; userComment: string }>({
+
+    // PATCH /api/comments/123
+    updateComment: builder.mutation<Comment, { id: number } & UpdateCommentDto>({
       query: ({ id, userComment }) => ({
         url: `comments/${id}`,
         method: 'PATCH',
-        body: { userComment },
+        body: { userComment }, // ← camelCase!
       }),
-      invalidatesTags: [{ type: 'Comment', id: 'COMMENT' }],
+      invalidatesTags: [{ type: 'Comment', id: 'LIST' }],
     }),
 
+    // DELETE /api/comments/123
     deleteComment: builder.mutation<void, number>({
       query: id => ({
         url: `comments/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: 'Comment', id: 'COMMENT' }],
+      invalidatesTags: [{ type: 'Comment', id: 'LIST' }],
     }),
   }),
 });

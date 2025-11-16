@@ -2,27 +2,40 @@ import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Tooltip } from 'antd';
 import useProductCardActions from '@/hooks/useProductCardActions';
-import { Product } from '@/shared/types/interface';
+import { ProductBase } from '@/shared/types/interface';
 import StarRating from '@/components/ui/starRating';
 import QuantityControllers from '@/components/ui/quantityControllers';
 import Icon from '@/components/ui/icon/Icon';
 import styles from './index.module.scss';
 
-interface CardProps extends Product {
-  id: string;
-  isInCart?: boolean;
-  cartQuantity: number;
+interface CardProps extends ProductBase {
+  quantity?: number;
+  stock_quantity?: number;
+  cart_quantity?: number;
   isInCartPage?: boolean;
-  stockQuantity: number;
 }
 
 const Card: React.FC<CardProps> = memo(
-  ({ id, title, description, price, accum, memory, photo, stockQuantity, brand }) => {
+  ({
+    id,
+    title,
+    description,
+    price,
+    accum,
+    memory,
+    photo,
+    brand,
+    quantity,
+    cart_quantity,
+    stock_quantity,
+    isInCartPage,
+  }) => {
+    const stockQuantity = stock_quantity ?? quantity ?? 0;
     const {
       isAuth,
       isLiked,
-      isInCart,
-      cartQuantity,
+      isInCart: isInCartFromHook,
+      cart_quantity: cartQtyFromHook,
       ratingData,
       handleLikeToggle,
       handleAddToCart,
@@ -31,6 +44,9 @@ const Card: React.FC<CardProps> = memo(
       handleDeleteFromCart,
       handleRate,
     } = useProductCardActions(id, stockQuantity);
+
+    const actualCartQuantity = isInCartPage ? cart_quantity ?? 0 : cartQtyFromHook;
+    const isInCart = isInCartPage ? true : isInCartFromHook;
 
     return (
       <div className={stockQuantity === 0 ? styles.CardError : styles.Card}>
@@ -56,12 +72,12 @@ const Card: React.FC<CardProps> = memo(
         </span>
         <div className={styles.CardQuantityWrapper}>
           <span className={stockQuantity === 0 ? styles.CardQuantityError : styles.CardQuantity}>
-            {stockQuantity === 0 ? 'Нет в наличии' : `В наличии: ${stockQuantity}`}{' '}
+            {quantity === 0 ? 'Нет в наличии' : `В наличии: ${stockQuantity}`}{' '}
           </span>
 
           {isInCart && (
             <QuantityControllers
-              quantity={cartQuantity}
+              quantity={actualCartQuantity}
               stockQuantity={stockQuantity}
               onIncrease={handleQuantityPlus}
               onDecrease={handleQuantityMinus}
@@ -96,7 +112,7 @@ const Card: React.FC<CardProps> = memo(
                 <span>
                   {!isAuth
                     ? 'Войдите, чтобы добавить'
-                    : stockQuantity === 0
+                    : quantity === 0
                     ? 'Нет в наличии'
                     : isInCart
                     ? 'В корзине'

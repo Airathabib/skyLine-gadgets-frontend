@@ -28,7 +28,6 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ onRefetch }) =>
         price: Number(values.price) || 0,
         rating: Number(values.rating) || 1,
         quantity: Number(values.quantity) || 1,
-        addedToCart: Boolean(values.addedToCart),
       };
       await createProduct(payload).unwrap();
       message.success('Товар добавлен!');
@@ -88,7 +87,7 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ onRefetch }) =>
         layout="vertical"
         onFinish={handleFinish}
         form={form}
-        initialValues={{ rating: 1, quantity: 1, like: false, addedToCart: false }}
+        initialValues={{ rating: 1, quantity: 1 }}
       >
         <Form.Item name="title" label="Название" rules={[{ required: true }]}>
           <Input placeholder="Название товара" />
@@ -130,12 +129,7 @@ const ProductsManagement: React.FC<ProductsManagementProps> = ({ onRefetch }) =>
         <Form.Item name="rating" hidden>
           <Input type="hidden" />
         </Form.Item>
-        <Form.Item name="like" hidden>
-          <Input type="hidden" />
-        </Form.Item>
-        <Form.Item name="addedToCart" hidden>
-          <Input type="hidden" />
-        </Form.Item>
+
         <Button type="primary" htmlType="submit" loading={isLoading} block>
           Добавить товар
         </Button>

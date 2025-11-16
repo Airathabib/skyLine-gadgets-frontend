@@ -19,7 +19,7 @@ const StarRating: React.FC<StarRatingProps> = ({ productId, onRate }) => {
 
   return (
     <Tooltip title={!isAuth ? 'Войдите для оценки товара' : ''}>
-      <Rate allowHalf value={average} onChange={onRate} disabled={!isAuth} />
+      <Rate value={average} onChange={onRate} disabled={!isAuth} />
     </Tooltip>
   );
 };

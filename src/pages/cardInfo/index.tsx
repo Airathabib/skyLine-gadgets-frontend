@@ -19,14 +19,14 @@ const CardInfo: React.FC = () => {
     isAuth,
     isLiked,
     isInCart,
-    cartQuantity,
+    cart_quantity,
     ratingData,
     handleLikeToggle,
     handleQuantityPlus,
     handleQuantityMinus,
     handleDeleteFromCart,
     handleRate,
-  } = useProductCardActions(id!, product?.stockQuantity || 0);
+  } = useProductCardActions(id!, product?.quantity || 0);
 
   const returnToCard = () => navigate(-1);
 
@@ -70,9 +70,7 @@ const CardInfo: React.FC = () => {
                 product.quantity === 0 ? styles.CardInfoQuantityError : styles.CardInfoQuantity
               }
             >
-              {product.stockQuantity === 0
-                ? 'Нет в наличии'
-                : `В наличии: ${product.stockQuantity}`}
+              {product.quantity === 0 ? 'Нет в наличии' : `В наличии: ${product.quantity}`}
             </p>
             <p className={styles.CardInfoPrice}>Цена: {product.price}₽</p>
           </div>
@@ -94,8 +92,8 @@ const CardInfo: React.FC = () => {
 
           {isInCart ? (
             <QuantityControllers
-              quantity={cartQuantity}
-              stockQuantity={product.stockQuantity}
+              quantity={cart_quantity}
+              stockQuantity={product.quantity}
               onIncrease={handleQuantityPlus}
               onDecrease={handleQuantityMinus}
               onDelete={handleDeleteFromCart}
@@ -105,13 +103,13 @@ const CardInfo: React.FC = () => {
               <div style={{ display: 'inline-block' }}>
                 <button
                   className={styles.CardInfoAddToCart}
-                  disabled={product.stockQuantity === 0}
+                  disabled={product.quantity === 0}
                   onClick={handleQuantityPlus}
                 >
                   <span>
                     {!isAuth
                       ? 'Войдите,чтобы добавить'
-                      : product.stockQuantity === 0
+                      : product.quantity === 0
                       ? 'Нет в наличии'
                       : isInCart
                       ? 'В корзине'

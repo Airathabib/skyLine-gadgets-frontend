@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { Button, Form, Input, Popconfirm, message } from 'antd';
 import { CardContext } from '@/context/Context';
-import { CardContextType, Comments as CommentType } from '@/shared/types/interface';
+import { CardContextType, Comment, CreateCommentDto } from '@/shared/types/interface';
 import styles from '../index.module.scss';
 
 interface CommentItemProps {
-  comment: CommentType & { replies?: CommentType[] };
-  onReply: (data: Pick<CommentType, 'userName' | 'userComment'>, parent_id: number) => void;
+  comment: Comment;
+  onReply: (data: Pick<CreateCommentDto, 'userName' | 'userComment'>, parent_id: number) => void;
   onEdit: (commentId: number, values: { userComment: string }) => void;
-  onDelete: (commentId: number) => void;
+  onDelete: (comment_id: number) => void;
   user: {
     login: string;
     id: number;
@@ -22,7 +22,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, onReply, onEdit, onD
   const [replyForm] = Form.useForm();
   const { formatDate } = useContext(CardContext) as CardContextType;
 
-  const isAuthor = comment.user_id === user?.id;
+  const isAuthor = comment.userId === user?.id;
   const isAdmin = user?.role === 'admin';
   const canEdit = isAuthor;
   const canDelete = isAuthor || isAdmin;
@@ -44,6 +44,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, onReply, onEdit, onD
 
       {isEditing ? (
         <Form
+          form={replyForm}
           className={styles.CommentsForm}
           initialValues={{ userComment: comment.userComment ?? '' }}
           onFinish={values => {
@@ -51,9 +52,14 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, onReply, onEdit, onD
             setIsEditing(false);
           }}
         >
-          <Form.Item name="userComment" className={styles.CommentsFormItem}>
+          <Form.Item
+            name="userComment"
+            rules={[{ required: true }]}
+            className={styles.CommentsFormItem}
+          >
             <Input.TextArea autoSize={{ minRows: 3, maxRows: 10 }} style={{ resize: 'none' }} />
           </Form.Item>
+
           <div className={styles.BtnWrapper}>
             <Button size="small" type="primary" htmlType="submit">
               Сохранить

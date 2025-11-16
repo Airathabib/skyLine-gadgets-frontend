@@ -16,10 +16,11 @@ const CardListRenderer: React.FC<CardListRendererProps> = ({ products, cart = []
       const cartItem = cart.find(item => item.id === product.id);
       return (
         <Card
-          key={product.id}
           {...product}
+          key={product.id}
+          stockQuantity={product.quantity}
           isInCart={!!cartItem}
-          cartQuantity={cartItem?.cartQuantity || 0}
+          cartQuantity={cartItem?.cart_quantity || 0}
         />
       );
     });
