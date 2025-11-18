@@ -2,7 +2,10 @@
 
 .Card {
   @include CardBase;
-
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
   &Error {
     @include CardBase;
     border-color: var(--border-critical);
@@ -97,14 +100,18 @@
     color: var(--red-400);
     cursor: pointer;
     padding: 0;
+    touch-action: manipulation;
     transition: color 0.3s ease, fill 0.3s ease;
     -webkit-transition: color 0.3s ease, fill 0.3s ease;
     -moz-transition: color 0.3s ease, fill 0.3s ease;
     -ms-transition: color 0.3s ease, fill 0.3s ease;
     -o-transition: color 0.3s ease, fill 0.3s ease;
 
-    &:hover {
-      color: var(--red-500);
+    // Hover только на устройствах с курсором
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--red-500);
+      }
     }
 
     &:focus-visible {
@@ -149,9 +156,12 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-
-    &:hover {
-      color: var(--accent-active);
+    touch-action: manipulation;
+    // Hover только на десктопе
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--accent-active);
+      }
     }
 
     &:focus-visible {
@@ -195,16 +205,18 @@
     @include Btn;
     background-color: var(--red-primary);
     color: var(--white-primary);
+    touch-action: manipulation;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
     -webkit-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
     -moz-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
     -ms-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
     -o-transition: background-color 0.3s ease-in-out, color 0.3s ease-out;
-
-    &:hover {
-      background-color: var(--red-700);
-      color: var(--white-500);
-      cursor: pointer;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--red-700);
+        color: var(--white-500);
+        cursor: pointer;
+      }
     }
 
     &:focus-visible {
@@ -224,11 +236,14 @@
   width: 60%;
   text-align: center;
   @include paragraph3;
+  margin-top: 1rem;
+  border: none;
   color: var(--link-text);
   padding: 0.5rem 1rem;
   cursor: pointer;
   background-color: var(--link-bg);
   text-decoration: none;
+  touch-action: manipulation;
   transition: color 0.3s ease, background-color 0.3s ease;
   -webkit-transition: color 0.3s ease, background-color 0.3s ease;
   -moz-transition: color 0.3s ease, background-color 0.3s ease;
@@ -240,10 +255,12 @@
   -ms-border-radius: var(--largeRadius);
   -o-border-radius: var(--largeRadius);
 
-  &:hover {
-    color: var(--purple-800);
-    background-color: transparent;
-    border-color: transparent;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--purple-800);
+      background-color: transparent;
+      border-color: transparent;
+    }
   }
 
   &:focus-visible {

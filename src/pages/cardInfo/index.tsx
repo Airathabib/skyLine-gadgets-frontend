@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Spin, Tooltip } from 'antd';
+import { Spin } from 'antd';
 import { useGetProductCardQuery } from '@/store/productCardApi';
 import useProductCardActions from '@/hooks/useProductCardActions';
 import StarRating from '@/components/ui/starRating';
@@ -36,7 +36,6 @@ const CardInfo: React.FC = () => {
 
   return (
     <div className={styles.CardInfo}>
-      {error && <div className={styles.error}>Ошибка загрузки продукта</div>}
       <header className={styles.CardInfoHeader}>
         <button className={styles.CardInfoBack} onClick={returnToCard}>
           <Icon name="arrowBack" size={24} />
@@ -54,16 +53,13 @@ const CardInfo: React.FC = () => {
             <p className={styles.CardInfoAccum}>Аккумулятор: {product.accum}мА·ч</p>
             <p className={styles.CardInfoMemory}>Обьем памяти: {product.memory}ГБ</p>
             <div className={styles.CardInfoRating}>
-              {' '}
               Рейтинг:{' '}
-              {
-                <StarRating
-                  productId={product.id}
-                  average={ratingData?.average || 0}
-                  userRating={ratingData?.userRating}
-                  onRate={handleRate}
-                />
-              }
+              <StarRating
+                productId={product.id}
+                average={ratingData?.average || 0}
+                userRating={ratingData?.userRating}
+                onRate={handleRate}
+              />
             </div>
             <p
               className={
@@ -77,19 +73,29 @@ const CardInfo: React.FC = () => {
         </div>
 
         <div className={styles.CardInfoBtnWrapper}>
-          <Tooltip title={!isAuth ? 'Войдите для добавления товара в избранное' : ''}>
-            <div style={{ display: 'inline-block' }}>
-              <button
-                className={isLiked ? styles.CardInfoBtnEditActive : styles.CardInfoBtnEdit}
-                onClick={handleLikeToggle}
-              >
-                <Icon name="cardHeart" size={24} />
+          {/* Кнопка "В избранное" */}
+          {isAuth ? (
+            <button
+              className={isLiked ? styles.CardInfoBtnEditActive : styles.CardInfoBtnEdit}
+              onClick={handleLikeToggle}
+              role="button"
+              tabIndex={0}
+            >
+              <Icon name="cardHeart" size={24} />
+              <span>{isLiked ? 'В избранном' : 'Добавить в избранное'}</span>
+            </button>
+          ) : (
+            <button
+              className={styles.CardInfoBtnEdit}
+              disabled
+              title="Войдите для добавления товара в избранное"
+            >
+              <Icon name="cardHeart" size={24} />
+              <span>Войдите, чтобы добавить</span>
+            </button>
+          )}
 
-                <span>{isLiked ? 'В избранном' : 'Добавить в избранное'}</span>
-              </button>
-            </div>
-          </Tooltip>
-
+          {/* Кнопка "В корзину" */}
           {isInCart ? (
             <QuantityControllers
               quantity={cart_quantity}
@@ -98,32 +104,29 @@ const CardInfo: React.FC = () => {
               onDecrease={handleQuantityMinus}
               onDelete={handleDeleteFromCart}
             />
+          ) : isAuth ? (
+            <button
+              className={styles.CardInfoAddToCart}
+              disabled={product.quantity === 0}
+              onClick={handleQuantityPlus}
+              role="button"
+              tabIndex={0}
+            >
+              <span>{product.quantity === 0 ? 'Нет в наличии' : 'Добавить в корзину'}</span>
+              <Icon name="cardCart" size={24} />
+            </button>
           ) : (
-            <Tooltip title={!isAuth ? 'Войдите для добавления товара в корзину' : ''}>
-              <div style={{ display: 'inline-block' }}>
-                <button
-                  className={styles.CardInfoAddToCart}
-                  disabled={product.quantity === 0}
-                  onClick={handleQuantityPlus}
-                >
-                  <span>
-                    {!isAuth
-                      ? 'Войдите,чтобы добавить'
-                      : product.quantity === 0
-                      ? 'Нет в наличии'
-                      : isInCart
-                      ? 'В корзине'
-                      : 'Добавить в корзину'}
-                  </span>
-
-                  <Icon name="cardCart" size={24} />
-                </button>
-              </div>
-            </Tooltip>
+            <button
+              className={styles.CardInfoAddToCart}
+              disabled
+              title="Войдите для добавления товара в корзину"
+            >
+              <span>Войдите, чтобы добавить</span>
+              <Icon name="cardCart" size={24} />
+            </button>
           )}
         </div>
       </div>
-
       <Comments productId={id} />
     </div>
   );

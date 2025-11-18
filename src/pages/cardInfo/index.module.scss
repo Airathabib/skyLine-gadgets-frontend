@@ -33,6 +33,7 @@
     text-decoration: none;
     color: var(--text-secondary);
     font-weight: 600;
+    touch-action: manipulation;
     @include TransitionBase;
     border-radius: var(--largeRadius);
     -webkit-border-radius: var(--largeRadius);
@@ -40,8 +41,10 @@
     -ms-border-radius: var(--largeRadius);
     -o-border-radius: var(--largeRadius);
 
-    &:hover {
-      color: var(--purple-600);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--purple-600);
+      }
     }
   }
 
@@ -59,6 +62,14 @@
 
     &Error {
       color: var(--red-primary);
+    }
+    &AddToCart,
+    &BtnEdit,
+    &BtnEditActive {
+      min-height: 44px; /* Минимальный размер для тача */
+      min-width: 44px;
+      padding: 0.5rem 1rem;
+      border-radius: var(--mediumRadius);
     }
 
     &Rating {
@@ -83,14 +94,16 @@
     font-size: 0.9rem;
     @include ButtonReset;
     @include TransitionBase;
-
-    &:hover {
-      color: var(--accent-active);
-      transform: scale(1.2);
-      -webkit-transform: scale(1.2);
-      -moz-transform: scale(1.2);
-      -ms-transform: scale(1.2);
-      -o-transform: scale(1.2);
+    touch-action: manipulation;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--accent-active);
+        transform: scale(1.05);
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+      }
     }
   }
 
@@ -140,14 +153,16 @@
     color: var(--red-400);
     cursor: pointer;
     padding: 0;
+    touch-action: manipulation;
     transition: color 0.3s ease, fill 0.3s ease;
     -webkit-transition: color 0.3s ease, fill 0.3s ease;
     -moz-transition: color 0.3s ease, fill 0.3s ease;
     -ms-transition: color 0.3s ease, fill 0.3s ease;
     -o-transition: color 0.3s ease, fill 0.3s ease;
-
-    &:hover {
-      color: var(--red-500);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--red-500);
+      }
     }
 
     &:focus-visible {

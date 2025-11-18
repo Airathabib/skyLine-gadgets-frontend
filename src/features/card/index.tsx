@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Tooltip } from 'antd';
 import useProductCardActions from '@/hooks/useProductCardActions';
 import { ProductBase } from '@/shared/types/interface';
@@ -7,13 +6,13 @@ import StarRating from '@/components/ui/starRating';
 import QuantityControllers from '@/components/ui/quantityControllers';
 import Icon from '@/components/ui/icon/Icon';
 import styles from './index.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface CardProps extends ProductBase {
   quantity?: number;
-  stockQuantity?: number;
-  cartQuantity?: number;
+  stock_quantity?: number;
+  cart_quantity?: number;
   isInCartPage?: boolean;
-  isInCart?: boolean;
 }
 
 const Card: React.FC<CardProps> = memo(
@@ -27,11 +26,11 @@ const Card: React.FC<CardProps> = memo(
     photo,
     brand,
     quantity,
-    cartQuantity,
-    stockQuantity,
+    cart_quantity,
+    stock_quantity,
     isInCartPage,
   }) => {
-    const resolvedStockQuantity = stockQuantity ?? quantity ?? 0;
+    const stockQuantity = stock_quantity ?? quantity ?? 0;
     const {
       isAuth,
       isLiked,
@@ -44,10 +43,11 @@ const Card: React.FC<CardProps> = memo(
       handleQuantityMinus,
       handleDeleteFromCart,
       handleRate,
-    } = useProductCardActions(id, resolvedStockQuantity);
+    } = useProductCardActions(id, stockQuantity);
 
-    const actualCartQuantity = isInCartPage ? cartQuantity ?? 0 : cartQtyFromHook;
+    const actualCartQuantity = isInCartPage ? cart_quantity ?? 0 : cartQtyFromHook;
     const isInCart = isInCartPage ? true : isInCartFromHook;
+    const navigate = useNavigate();
 
     return (
       <div className={stockQuantity === 0 ? styles.CardError : styles.Card}>
@@ -62,14 +62,12 @@ const Card: React.FC<CardProps> = memo(
         <span className={styles.CardRating}>
           {' '}
           Рейтинг:{' '}
-          {
-            <StarRating
-              productId={id}
-              average={ratingData?.average || 0}
-              userRating={ratingData?.userRating}
-              onRate={handleRate}
-            />
-          }
+          <StarRating
+            productId={id}
+            average={ratingData?.average || 0}
+            userRating={ratingData?.userRating}
+            onRate={handleRate}
+          />
         </span>
         <div className={styles.CardQuantityWrapper}>
           <span className={stockQuantity === 0 ? styles.CardQuantityError : styles.CardQuantity}>
@@ -79,7 +77,7 @@ const Card: React.FC<CardProps> = memo(
           {isInCart && (
             <QuantityControllers
               quantity={actualCartQuantity}
-              stockQuantity={resolvedStockQuantity}
+              stockQuantity={stockQuantity}
               onIncrease={handleQuantityPlus}
               onDecrease={handleQuantityMinus}
               onDelete={handleDeleteFromCart}
@@ -90,44 +88,47 @@ const Card: React.FC<CardProps> = memo(
 
         <div className={styles.CardButtonWrapper}>
           <Tooltip title={!isAuth ? 'Войдите для добавления товара в избранное' : ''}>
-            <div style={{ display: 'inline-block' }}>
-              <button
-                className={
-                  isLiked ? `${styles.CardBtnEdit} ${styles.CardBtnEditActive}` : styles.CardBtnEdit
-                }
-                onClick={handleLikeToggle}
-                aria-label={isLiked ? 'Убрать из избранного' : 'Добавить в избранное'}
-              >
-                <Icon name="cardHeart" size={24} />
-              </button>
-            </div>
+            <button
+              className={
+                isLiked ? `${styles.CardBtnEdit} ${styles.CardBtnEditActive}` : styles.CardBtnEdit
+              }
+              onClick={handleLikeToggle}
+              aria-label={isLiked ? 'Убрать из избранного' : 'Добавить в избранное'}
+              type="button"
+            >
+              <Icon name="cardHeart" size={24} />
+            </button>
           </Tooltip>
 
           <Tooltip title={!isAuth ? 'Войдите для добавления товара в корзину' : ''}>
-            <div style={{ display: 'inline-block' }}>
-              <button
-                className={styles.CardBtnAddToCart}
-                onClick={handleAddToCart}
-                disabled={resolvedStockQuantity <= 0 || isInCart}
-              >
-                <span>
-                  {!isAuth
-                    ? 'Войдите, чтобы добавить'
-                    : quantity === 0
-                    ? 'Нет в наличии'
-                    : isInCart
-                    ? 'В корзине'
-                    : 'Добавить в корзину'}
-                </span>
-                <Icon name="cardCart" size={24} />{' '}
-              </button>
-            </div>
+            <button
+              className={styles.CardBtnAddToCart}
+              onClick={handleAddToCart}
+              disabled={stockQuantity <= 0 || isInCart}
+              type="button"
+            >
+              <span>
+                {!isAuth
+                  ? 'Войдите, чтобы добавить'
+                  : quantity === 0
+                  ? 'Нет в наличии'
+                  : isInCart
+                  ? 'В корзине'
+                  : 'Добавить в корзину'}
+              </span>
+              <Icon name="cardCart" size={24} />
+            </button>
           </Tooltip>
         </div>
 
-        <NavLink to={`/card/${id}`} className={styles.CardBtnMore}>
+        <button
+          type="button"
+          className={styles.CardBtnMore}
+          onClick={() => navigate(`/card/${id}`)}
+          aria-label={`Подробнее о товаре ${title}`}
+        >
           Показать подробнее
-        </NavLink>
+        </button>
       </div>
     );
   }
