@@ -59,7 +59,8 @@ const Cart: React.FC = () => {
           <Card
             key={item.id}
             {...item}
-            quantity={item.stock_quantity}
+            stockQuantity={item.stock_quantity}
+            cartQuantity={item.cart_quantity}
             isInCart={true}
             isInCartPage={true}
           />
