@@ -13,6 +13,7 @@ interface CardProps extends ProductBase {
   stock_quantity?: number;
   cart_quantity?: number;
   isInCartPage?: boolean;
+  isInCart?: boolean;
 }
 
 const Card: React.FC<CardProps> = memo(
