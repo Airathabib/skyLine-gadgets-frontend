@@ -3,7 +3,9 @@ import { useMemo } from 'react';
 import { CardContext } from '@/context/Context';
 import { CardContextType } from '@/shared/types/interface';
 
-export const useFilteredList = <T extends Record<string, any>>(items: T[]): { data: T[] } => {
+export const useFilteredList = <T extends Record<string, any> & { id: string }>(
+  items: T[]
+): { data: T[] } => {
   const { searchParams } = useContext(CardContext) as CardContextType;
 
   const filteredArr = useMemo(() => {
@@ -18,6 +20,7 @@ export const useFilteredList = <T extends Record<string, any>>(items: T[]): { da
 
     let result = [...items];
 
+    // Фильтрация
     if (brandFilter) {
       result = result.filter(item => item.brand === brandFilter);
     }
@@ -42,12 +45,15 @@ export const useFilteredList = <T extends Record<string, any>>(items: T[]): { da
       });
     }
 
+    // Сортировка
     if (sort) {
       result.sort((a, b) => {
         const priceA = Number(a.price);
         const priceB = Number(b.price);
         return sort === 'asc' ? priceA - priceB : priceB - priceA;
       });
+    } else {
+      result.sort((a, b) => a.id.localeCompare(b.id));
     }
 
     return result;
