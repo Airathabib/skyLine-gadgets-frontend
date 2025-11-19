@@ -51,7 +51,7 @@ const Cart: React.FC = () => {
     <div className={styles.Cart}>
       <div className={styles.CartHeader}>
         <h2 className={styles.CartTitle}>Товаров в корзине: {productCount}</h2>
-        <h2 className={styles.CartTitle}>На сумму: {totalPrice} ₽</h2>
+        <h2 className={styles.CartTitle}>На сумму: {totalPrice}₽</h2>
       </div>
       <div className={styles.CartWrapper}>
         {sortedCart.length > 0 && <Sort />}

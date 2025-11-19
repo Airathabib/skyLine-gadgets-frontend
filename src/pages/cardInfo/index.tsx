@@ -48,7 +48,7 @@ const CardInfo: React.FC = () => {
         <h3 className={styles.CardInfoTitle}>{product.title}</h3>
         <p className={styles.CardInfoDescription}>{product.description}</p>
         <div className={styles.CardInfoBlock}>
-          <img className={styles.CardInfoImage} src={product.photo} alt="photo" />
+          <img className={styles.CardInfoImage} src={product.photo} alt="фото товара" />
           <div className={styles.CardInfoText}>
             <p className={styles.CardInfoAccum}>Аккумулятор: {product.accum}мА·ч</p>
             <p className={styles.CardInfoMemory}>Обьем памяти: {product.memory}ГБ</p>

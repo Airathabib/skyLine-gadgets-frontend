@@ -85,7 +85,7 @@ const Card: React.FC<CardProps> = memo(
             />
           )}
         </div>
-        <img className={styles.CardImage} src={photo} alt="photo" />
+        <img className={styles.CardImage} src={photo} alt="фото товара" />
 
         <div className={styles.CardButtonWrapper}>
           <Tooltip title={!isAuth ? 'Войдите для добавления товара в избранное' : ''}>
