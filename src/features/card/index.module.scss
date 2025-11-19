@@ -29,10 +29,10 @@
   &Title {
     @include titleH3;
     display: -webkit-box;
-    line-clamp: 3;
-    -webkit-line-clamp: 3;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden; // ← и это
+    overflow: hidden;
     text-overflow: ellipsis;
     color: var(--black-600);
   }
@@ -46,7 +46,7 @@
     line-clamp: 2;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden; // ← и это
+    overflow: hidden;
     text-overflow: ellipsis;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -107,7 +107,6 @@
     -ms-transition: color 0.3s ease, fill 0.3s ease;
     -o-transition: color 0.3s ease, fill 0.3s ease;
 
-    // Hover только на устройствах с курсором
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         color: var(--red-500);
@@ -157,7 +156,7 @@
     background-color: transparent;
     cursor: pointer;
     touch-action: manipulation;
-    // Hover только на десктопе
+
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         color: var(--accent-active);
@@ -233,13 +232,12 @@
 }
 
 .CardBtnMore {
-  width: 60%;
   text-align: center;
   @include paragraph3;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   border: none;
   color: var(--link-text);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   cursor: pointer;
   background-color: var(--link-bg);
   text-decoration: none;

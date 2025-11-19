@@ -13,17 +13,17 @@
 
 .SortContainer {
   display: flex;
-  flex-wrap: wrap; /* ← позволяет переносить */
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem 1rem; /* row-gap / column-gap */
+  gap: 0.5rem 1rem;
   justify-content: flex-start;
   padding: 0 1rem;
 }
 
 .SortTitle {
   @include paragraph3;
-  flex: 0 0 auto; /* ← не сжимается */
+  flex: 0 0 auto;
   white-space: nowrap;
 }
 
@@ -49,9 +49,16 @@
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
 
-  &:hover {
-    color: var(--link-text);
-    transform: scale(1.05);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--link-text);
+      transform: scale(1.05);
+    }
+  }
+
+  &:active {
+    transform: scale(0.98);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -59,9 +66,18 @@
   color: var(--purple-primary);
   background-color: rgba(138, 43, 226, 0.05);
   font-weight: 600;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: rgba(138, 43, 226, 0.1);
+    }
+  }
+
+  &:active {
+    background-color: rgba(138, 43, 226, 0.15);
+  }
 }
 
-/* ========== Адаптив от 420px ========== */
 @media (max-width: 576px) {
   .SortContainer {
     gap: 0.25rem 0.75rem;
@@ -76,6 +92,9 @@
   .SortValueActive {
     font-size: 0.875rem;
     padding: 0.2rem 0.4rem;
+    min-height: 44px;
+    min-width: 44px;
+    justify-content: center;
   }
 }
 
@@ -92,5 +111,7 @@
   .SortValueActive {
     font-size: 0.8125rem;
     padding: 0.15rem 0.3rem;
+    min-height: 44px;
+    min-width: 44px;
   }
 }
