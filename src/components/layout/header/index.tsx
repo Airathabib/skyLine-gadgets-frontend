@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { debounce } from 'lodash';
-import { Drawer, Flex, Input, Form, Select, Button } from 'antd';
+import { Drawer, Flex, Input, Form, Select, Button, message } from 'antd';
 import { CardContext } from '@/context/Context';
 import InputSearch from '@/components/ui/inputSearch';
 import HeaderComponent from './HeaderComponent';
@@ -13,6 +13,8 @@ import styles from './index.module.scss';
 const Header: React.FC = () => {
   const { data, error, isLoading } = useGetBrandsQuery();
   const [form] = Form.useForm();
+  const errorShownRef = useRef(false);
+
   const {
     handleChangeFilters,
     openNav,
@@ -22,6 +24,14 @@ const Header: React.FC = () => {
     validateNumberInput,
     searchParams,
   } = useContext(CardContext) as CardContextType;
+
+  useEffect(() => {
+    if (error && !errorShownRef.current) {
+      message.warning('Не удалось загрузить список брендов. Проверьте подключение к серверу.');
+      errorShownRef.current = true;
+    }
+    if (!error) errorShownRef.current = false;
+  }, [error]);
 
   const setActiveClass = ({ isActive }: { isActive: boolean }): string =>
     isActive ? styles.FavoriteLinkActive : styles.FavoriteLink;
@@ -88,13 +98,13 @@ const Header: React.FC = () => {
               <div className={styles.HeaderFilter}>
                 <h3 className={styles.HeaderFilterTitle}>Бренд</h3>
                 <Form.Item name="brand" layout="vertical">
-                  {error && <div className={styles.error}>Ошибка загрузки брендов</div>}
                   <Select
                     onSelect={value => handleChangeFilters('brand', value)}
                     loading={isLoading}
-                    placeholder="Выберите бренд"
+                    placeholder={error ? '⚠️ Ошибка загрузки брендов' : 'Выберите бренд'}
                     options={options}
-                  ></Select>
+                    disabled={!!error} 
+                  />
                 </Form.Item>
               </div>
 
@@ -141,15 +151,12 @@ const Header: React.FC = () => {
 
         <div className={styles.HeaderLinks}>
           <NavLink className={setActiveClass} onClick={resetCategory} to="/">
-            {' '}
             Главная
           </NavLink>
           <NavLink className={setActiveClass} onClick={resetCategory} to="/favorites">
-            {' '}
             Избранное
           </NavLink>
           <NavLink className={setActiveClass} onClick={resetCategory} to="/cart">
-            {' '}
             Корзина
           </NavLink>
         </div>

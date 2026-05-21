@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Spin } from 'antd';
+import { Button, Spin, message } from 'antd';
 import Logo from '@/assets/logo/logo.png';
 import { CardContext } from '@/context/Context';
 import useCartList from '@/hooks/useCartList';
@@ -19,6 +19,16 @@ const HeaderComponent: React.FC = () => {
   const { isLoading, error } = useProductList();
 
   const { handleOpenNav, searchParams, setOpenModal } = useContext(CardContext) as CardContextType;
+  const errorShownRef = useRef(false); // ← флаг, чтобы не спамить уведомлениями
+
+  // Показываем ошибку 1 раз, без сдвигов в вёрстке
+  useEffect(() => {
+    if (error && !errorShownRef.current) {
+      message.warning('⚠️ Не удалось загрузить товары. Проверьте подключение к серверу.');
+      errorShownRef.current = true;
+    }
+    if (!error) errorShownRef.current = false;
+  }, [error]);
 
   const fiilters =
     searchParams.get('category') || searchParams.get('price_gte') || searchParams.get('price_lte');
@@ -26,7 +36,7 @@ const HeaderComponent: React.FC = () => {
   return (
     <Spin spinning={isLoading} size="large">
       <div className={styles.HeaderContainer}>
-        {error && <div className={styles.Error}>{error}</div>}
+        {/* ← УБРАЛИ сдвигающий div полностью */}
         <div className={styles.LogoContainer}>
           <Link to="appinfo">
             <img className={`${styles.Logo} ${styles.OrderLogo}`} src={Logo} alt="logo" />
@@ -34,8 +44,7 @@ const HeaderComponent: React.FC = () => {
           <div className={`${styles.BtnWrapper} ${styles.OrderBurger}`}>
             {fiilters && <div className={styles.FilterMarker} />}
             <button className={styles.HeaderBtn} onClick={handleOpenNav}>
-              {' '}
-              <Icon name="burger" color="transparent" size={36} />{' '}
+              <Icon name="burger" color="transparent" size={36} />
             </button>
           </div>
           <h1 className={`${styles.MainTitle} ${styles.OrderTitle}`}> SkyLine Gadgets</h1>
@@ -48,7 +57,7 @@ const HeaderComponent: React.FC = () => {
             </div>
 
             <div className={styles.MainCart}>
-              <Icon name="cart" color="transparent" size={32} />{' '}
+              <Icon name="cart" color="transparent" size={32} />
               {cart.length > 0 && <span className={styles.MainCartCount}> {cart.length}</span>}
             </div>
             <div className={styles.LoginEnter}>

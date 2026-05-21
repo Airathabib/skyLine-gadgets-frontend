@@ -33,6 +33,7 @@ const CardList: React.FC = () => {
     <div className={styles.CardList}>
       {filteredArr.length > 0 && <Sort />}
       <LoadingErrorHandler loading={isLoading} error={error} />
+     
       {!isLoading && !error && (
         <>
           {filteredArr.length > 0 && (
