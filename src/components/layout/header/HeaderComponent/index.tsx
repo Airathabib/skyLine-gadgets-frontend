@@ -19,9 +19,8 @@ const HeaderComponent: React.FC = () => {
   const { isLoading, error } = useProductList();
 
   const { handleOpenNav, searchParams, setOpenModal } = useContext(CardContext) as CardContextType;
-  const errorShownRef = useRef(false); // ← флаг, чтобы не спамить уведомлениями
+  const errorShownRef = useRef(false);
 
-  // Показываем ошибку 1 раз, без сдвигов в вёрстке
   useEffect(() => {
     if (error && !errorShownRef.current) {
       message.warning('⚠️ Не удалось загрузить товары. Проверьте подключение к серверу.');

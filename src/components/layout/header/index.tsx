@@ -103,7 +103,7 @@ const Header: React.FC = () => {
                     loading={isLoading}
                     placeholder={error ? '⚠️ Ошибка загрузки брендов' : 'Выберите бренд'}
                     options={options}
-                    disabled={!!error} 
+                    disabled={!!error}
                   />
                 </Form.Item>
               </div>

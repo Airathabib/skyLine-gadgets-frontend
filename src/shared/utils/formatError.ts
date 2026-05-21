@@ -1,52 +1,101 @@
-export const formatErrorMessage = (error: string | null): string => {
+const extractMessage = (value: unknown): string => {
+  if (typeof value === 'string') return value;
+  if (value instanceof Error) return value.message;
+  if (typeof value === 'object' && value !== null) {
+    const obj = value as Record<string, any>;
+    // Проверяем частые поля с сообщением об ошибке
+    return (
+      obj.message ||
+      obj.error ||
+      obj.errorMessage ||
+      obj.detail ||
+      obj.statusText ||
+      obj.data?.error ||
+      obj.data?.message ||
+      JSON.stringify(obj)
+    );
+  }
+  return String(value);
+};
+
+export const formatErrorMessage = (error: unknown): string => {
   if (!error) return '';
 
-  const lower = error.toLowerCase();
+  // 1. Извлекаем "сырое" сообщение из любого формата
+  const rawMessage = extractMessage(error).toLowerCase();
 
-  // Сетевые проблемы
+  // 2. Сетевые проблемы
   if (
-    lower.includes('network') ||
-    lower.includes('fetch') ||
-    lower.includes('connection') ||
-    lower.includes('cors')
+    rawMessage.includes('network') ||
+    rawMessage.includes('failed to fetch') ||
+    rawMessage.includes('connection') ||
+    rawMessage.includes('cors') ||
+    rawMessage.includes('load failed')
   ) {
-    return 'Нет подключения к интернету. Проверьте сеть и попробуйте снова.';
+    return 'Нет подключения к серверу. Проверьте интернет и попробуйте снова.';
   }
 
-  // Таймауты и отмены
-  if (lower.includes('timeout') || lower.includes('abort') || lower.includes('deadline')) {
+  // 3. Таймауты
+  if (
+    rawMessage.includes('timeout') ||
+    rawMessage.includes('abort') ||
+    rawMessage.includes('deadline')
+  ) {
     return 'Сервер не отвечает. Попробуйте обновить страницу.';
   }
 
-  // HTTP-коды и типичные ответы API
-  if (lower.includes('401') || lower.includes('unauthorized')) {
+  // 4. Авторизация
+  if (
+    rawMessage.includes('401') ||
+    rawMessage.includes('unauthorized') ||
+    rawMessage.includes('token')
+  ) {
     return 'Требуется авторизация. Войдите в аккаунт.';
   }
-  if (lower.includes('403') || lower.includes('forbidden')) {
+
+  // 5. Доступ запрещён
+  if (rawMessage.includes('403') || rawMessage.includes('forbidden')) {
     return 'Доступ запрещён.';
   }
-  if (lower.includes('404') || lower.includes('not found')) {
+
+  // 6. Не найдено
+  if (rawMessage.includes('404') || rawMessage.includes('not found')) {
     return 'Товары не найдены. Попробуйте изменить фильтры или категорию.';
   }
+
+  // 7. Слишком много запросов
   if (
-    lower.includes('429') ||
-    lower.includes('rate limit') ||
-    lower.includes('too many requests')
+    rawMessage.includes('429') ||
+    rawMessage.includes('rate limit') ||
+    rawMessage.includes('too many requests')
   ) {
     return 'Слишком много запросов. Подождите немного и попробуйте снова.';
   }
-  if (lower.includes('500') || lower.includes('internal') || lower.includes('server error')) {
+
+  // 8. Ошибка сервера
+  if (
+    rawMessage.includes('500') ||
+    rawMessage.includes('internal') ||
+    rawMessage.includes('server error')
+  ) {
     return 'Временные проблемы на сервере. Мы уже работаем над этим.';
   }
-  if (lower.includes('validation') || lower.includes('bad request') || lower.includes('400')) {
+
+  // 9. Ошибка валидации
+  if (
+    rawMessage.includes('validation') ||
+    rawMessage.includes('bad request') ||
+    rawMessage.includes('400')
+  ) {
     return 'Некорректные параметры запроса. Попробуйте позже.';
   }
 
-  // Если сообщение слишком длинное или содержит технический мусор
-  if (error.length > 120) {
+  // 10. Если сообщение слишком длинное или техническое — возвращаем общий текст
+  const original = extractMessage(error);
+  if (original.length > 120 || original.includes('{') || original.includes('[object')) {
     return 'Произошла ошибка при загрузке данных. Попробуйте обновить страницу.';
   }
 
-  // Фолбэк: возвращаем исходное сообщение, если оно уже короткое и понятное
-  return error;
+  // 11. Фолбэк: возвращаем оригинальное сообщение, если оно короткое и понятное
+  return original;
 };
