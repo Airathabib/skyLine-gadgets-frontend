@@ -3,7 +3,7 @@ import styles from './LoadingErrorHandler.module.scss';
 
 const LoadingErrorHandler: React.FC<{
   loading: boolean;
-  error: string | null;
+  error: unknown; 
 }> = ({ loading, error }) => {
   if (loading) return <h3 className={styles.loading}>Загрузка...</h3>;
 
